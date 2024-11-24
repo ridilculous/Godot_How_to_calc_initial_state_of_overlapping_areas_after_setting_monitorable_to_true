@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dga1vbfwkbhor"]
+
+[ext_resource type="Script" uid="uid://b1qx07bdrruhm" path="res://test.gd" id="1_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://rys76bw16kbr" path="res://Enemy.tscn" id="1_37kl0"]
+[ext_resource type="PackedScene" uid="uid://cxw4mna5v0td1" path="res://Tower.tscn" id="4_ppyta"]
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_8uh7m")
+enemy1 = ExtResource("1_37kl0")
+tower1 = ExtResource("4_ppyta")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 61.0
+offset_top = 50.0
+offset_right = 659.0
+offset_bottom = 333.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "How to calc initial state of overlapping areas after setting monitorable to true
+
+
+Press the left mouse button six times to reproduce the problem.
+
+hit_area.get_overlapping_areas() should return a non empty result
+starting with the 3rd step (when the yellow box turns orange),
+but it only does so starting with the 6th step.
+
+Once hit_area.get_overlapping_areas() starts to return results,
+the orange box will start to blink."
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 793.0
+offset_top = 129.0
+offset_right = 1133.0
+offset_bottom = 516.0
+text = "steps:
+1:
+  spawn_enemy(enemy1, Vector2(500,500))
+  t = spawn_tower(tower1, Vector2(600,500))
+  t.hurt_area.monitorable = false
+2:
+  t.global_position = Vector2(550,500)
+3:
+  t.hurt_area.monitorable = true
+  t.modulate.g = .5
+5:
+  t.global_position = Vector2(600,500)
+6:
+  t.global_position = Vector2(550,500)
+  s = 4
+"

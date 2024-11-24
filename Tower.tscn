@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxw4mna5v0td1"]
+
+[ext_resource type="Script" uid="uid://dqy14smncr3xx" path="res://Tower.gd" id="1_kd8nv"]
+
+[sub_resource type="Gradient" id="Gradient_3x2mu"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.409433, 0.230544, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ffktt"]
+gradient = SubResource("Gradient_3x2mu")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3x2mu"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxr6f"]
+radius = 25.0
+
+[node name="Tower1" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 34
+script = ExtResource("1_kd8nv")
+metadata/_custom_type_script = ExtResource("1_kd8nv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -0.500001)
+scale = Vector2(7, 5.22222)
+texture = SubResource("GradientTexture2D_ffktt")
+hframes = 10
+vframes = 7
+frame = 60
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.04904e-05, -1.52588e-05)
+shape = SubResource("CircleShape2D_3x2mu")
+
+[node name="HurtArea" type="Area2D" parent="."]
+position = Vector2(1.04904e-05, -14.5)
+collision_layer = 576
+collision_mask = 264
+input_pickable = false
+monitoring = false
+monitorable = false
+
+[node name="HurtBox" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(0, 14.5)
+shape = SubResource("CircleShape2D_rxr6f")
+
+[connection signal="mouse_entered" from="HurtArea" to="." method="_on_selection_area_mouse_entered"]
+[connection signal="mouse_exited" from="HurtArea" to="." method="_on_selection_area_mouse_exited"]
